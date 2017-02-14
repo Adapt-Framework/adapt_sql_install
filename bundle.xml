@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adapt_framework>
+    <bundle>
+        <label>SQL Install</label>
+        <name>sql_install</name>
+        <type>extension</type>
+        <version>1.0.0</version>
+        <namespace>\adapt/sql_install</namespace>
+        <version_status>release</version_status>
+        <availability>public</availability>
+        <description>Base bundle for custom SQL install scripts</description>
+        <copyright>Adapt framework</copyright>
+        <license>MIT</license>
+        <depends_on>
+            <bundle>
+                <name>adapt</name>
+                <version>2.0</version>
+            </bundle>
+        </depends_on>
+    </bundle>
+</adapt_framework>
