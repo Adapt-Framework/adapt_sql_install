@@ -11,11 +11,6 @@ defined('ADAPT_STARTED') or die;
 class model_sql_script extends model
 {
     /**
-     * @var string
-     */
-    protected $_script_file_name;
-
-    /**
      * model_sql_script constructor.
      * @param null $id
      * @param null $data_source
@@ -38,9 +33,6 @@ class model_sql_script extends model
         if (!$bundle_name || !$file_name || !$dialect) {
             return false;
         }
-
-        // Set the file name for later
-        $this->_script_file_name = $file_name;
 
         // Attempt to pull the data
         $sql = $this->data_source->sql;
@@ -91,36 +83,16 @@ class model_sql_script extends model
         if ($this->load_by_bundle_file($bundle_name, $file_name, $dialect)) {
             // We have a record - compare the hash
             $md5 = md5_file($file_path);
-            if ($md5 == $this->md5) {
+            if ($md5 == $this->script_content_md5) {
                 // File is the same as the previous run - no need to re-run
                 return false;
             } else {
                 // File is different - needs to be run
                 return true;
             }
-        } else {
-            // We don't - now need to check that this "file" doesn't belong to a different bundle
-            $sql = $this->data_source->sql;
-            $sql->select('sql_script_id')
-                ->from('sql_script')
-                ->where(
-                    new sql_and(
-                        new sql_cond('date_deleted', sql::IS, new sql_null()),
-                        new sql_cond('script_file_name', sql::EQUALS, q($file_name))
-                    )
-                );
-
-            $results = $sql->execute(0)->results();
-
-            // Perform the test
-            if (count($results) > 0) {
-                // We have records elsewhere - cannot run
-                return false;
-            } else {
-                // No record of this file found - it's the first time
-                return true;
-            }
         }
+
+        return true;
     }
 
     /**
