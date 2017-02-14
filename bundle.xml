@@ -5,7 +5,7 @@
         <name>sql_install</name>
         <type>extension</type>
         <version>1.0.0</version>
-        <namespace>\adapt/sql_install</namespace>
+        <namespace>\adapt\sql_install</namespace>
         <version_status>release</version_status>
         <availability>public</availability>
         <description>Base bundle for custom SQL install scripts</description>
