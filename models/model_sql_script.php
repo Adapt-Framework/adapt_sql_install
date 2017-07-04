@@ -44,7 +44,7 @@ class model_sql_script extends model
                     new sql_cond('ss.date_deleted', sql::IS, new sql_null()),
                     new sql_cond('bv.date_deleted', sql::IS, new sql_null()),
                     new sql_cond('ss.script_file_name', sql::EQUALS, q($file_name)),
-                    new sql_cond('bv.name', sql::EQUALS, q($bundle_name))
+                    new sql_cond('bv.bundle_name', sql::EQUALS, q($bundle_name))
                 )
             );
 
