@@ -115,7 +115,7 @@ class model_sql_script extends model
             ->where(
                 new sql_and(
                     new sql_cond('date_deleted', sql::IS, new sql_null()),
-                    new sql_cond('name', sql::EQUALS, q($bundle_name)),
+                    new sql_cond('bundle_name', sql::EQUALS, q($bundle_name)),
                     new sql_cond('version', sql::EQUALS, q($bundle_version))
                 )
             );
